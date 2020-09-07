@@ -9,5 +9,8 @@ Limit = 90
     raise "Limit is £#{Limit}" if @balance + amount > Limit 
     @balance += amount
   end
-  
+
+  def deduct(amount)
+    @balance -= amount
+  end
 end

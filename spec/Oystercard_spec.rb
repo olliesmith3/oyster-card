@@ -12,4 +12,9 @@ describe Oystercard do
   it 'throws error if we topup beyond £90' do
     expect {subject.top_up(100)}.to raise_error "Limit is £90"
   end 
+
+  it 'allows us to deduct money from a card' do
+    subject.top_up(20)
+    expect { subject.deduct(7) }.to change{ subject.balance }.by -7
+  end
 end 
