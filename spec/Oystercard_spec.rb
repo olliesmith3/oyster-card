@@ -20,13 +20,19 @@ describe Oystercard do
 
   describe "#touch_in" do
     it 'changes instance variable to true' do
+      subject.top_up(10)
       subject.touch_in
-       expect(subject.in_journey).to eq true  
+      expect(subject.in_journey).to eq true  
     end 
+
+    it 'won\'t allow you to touch in if your balance is below the minimum fare' do
+      expect{ subject.touch_in }.to raise_error "Your balance is below the minimum fare"
+    end
   end
 
   describe "#touch_out" do
     it 'changes instance variable to false' do
+      subject.top_up(10)
       subject.touch_in
       subject.touch_out
       expect(subject.in_journey).to eq false  
@@ -35,11 +41,13 @@ describe Oystercard do
 
   describe "#in_journey?" do 
     it 'checking if user is in a journey' do
+      subject.top_up(10)
       subject.touch_in
       expect(subject.in_journey?).to eq true 
     end
 
     it 'check user isn\'t on a journey' do 
+      subject.top_up(10)
       subject.touch_in
       subject.touch_out 
       expect(subject.in_journey?).to eq false
