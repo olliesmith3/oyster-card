@@ -6,6 +6,7 @@ class Oystercard
   DEFAULT_LIMIT = 90
   MINIMUM_FARE = 1
 
+
   def initialize(balance = DEFAULT_VALUE)
     @balance = balance
     @history = []
@@ -24,7 +25,8 @@ class Oystercard
   def touch_out(station, amount = MINIMUM_FARE)
     deduct(amount)
     @exit_station = station
-    @history << { entry_station: @entry_station, exit_station: @exit_station }
+    station.add_journey
+    # @history << { entry_station: @entry_station, exit_station: @exit_station }
     @entry_station = nil
   end
 
