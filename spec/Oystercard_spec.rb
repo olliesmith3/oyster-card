@@ -71,7 +71,7 @@ describe Oystercard do
   end
 
   it 'checks that @history is empty by default' do
-    expect(oyster.history).to eq []
+    expect(Journey.new.history).to eq []
   end
   
   let(:journey) { {entry_station: liverpool_street, exit_station: bow_road} }

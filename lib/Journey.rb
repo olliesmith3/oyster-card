@@ -9,7 +9,7 @@ attr_reader :entry_station, :exit_station, :history
 
   def finish_journey(exit_station)
     @exit_station = exit_station
-    @history << { entry_station: @entry_station, exit_station: @exit_station }
+    { entry_station: @entry_station, exit_station: @exit_station }
   end
 
   def in_journey?
