@@ -20,24 +20,15 @@ class Oystercard
   def touch_in(station)
     fail "Minimum fare is £#{MINIMUM_FARE}" if @balance < MINIMUM_FARE
     #@entry_station = station
-    Journey.new.start_journey
+    Journey.new(station)
   end
 
   def touch_out(station, amount = MINIMUM_FARE)
     deduct(amount)
-    @exit_station = station
-    @history << { entry_station: @entry_station, exit_station: @exit_station }
-    @entry_station = nil
-  end
-
-  def in_journey?
-    !@entry_station.nil?
-  end
-
-  def show_history
-    @history.each do |element|
-      puts "Entry station: #{element[:entry_station]}, Exit station: #{element[:exit_station]}"
-    end
+    Journey.new.finish_journey(station)
+    # @exit_station = station
+    # @history << { entry_station: @entry_station, exit_station: @exit_station }
+    # @entry_station = nil
   end
 
   private
