@@ -19,14 +19,14 @@ class Oystercard
 
   def touch_in(station)
     fail "Minimum fare is £#{MINIMUM_FARE}" if @balance < MINIMUM_FARE
-    @entry_station = station
+    #@entry_station = station
+    Journey.new.start_journey
   end
 
   def touch_out(station, amount = MINIMUM_FARE)
     deduct(amount)
     @exit_station = station
-    station.add_journey
-    # @history << { entry_station: @entry_station, exit_station: @exit_station }
+    @history << { entry_station: @entry_station, exit_station: @exit_station }
     @entry_station = nil
   end
 

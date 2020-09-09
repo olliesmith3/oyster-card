@@ -7,8 +7,5 @@ describe Journey do
   it "a new instance of Journey has an entry station" do
     expect(journey.entry_station).to eq "London Bridge"
   end
-
   
-
-
 end
