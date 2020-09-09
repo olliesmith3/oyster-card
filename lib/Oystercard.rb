@@ -29,7 +29,7 @@ class Oystercard
   end
 
   def in_journey?
-    @entry_station != nil ? true : false
+    !@entry_station.nil?
   end
 
   def show_history

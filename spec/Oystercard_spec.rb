@@ -68,9 +68,24 @@ describe Oystercard do
       expect(oyster.in_journey?).to be_falsey
     end
   end
-  it "lists the entry and exit stations" do
+
+  it 'checks that @history is empty by default' do
+    expect(oyster.history).to eq []
+  end
+ 
+  let(:journey) { {entry_station: liverpool_street, exit_station: bow_road} }
+
+  it 'checks that a journey has been added to the history' do
     oyster.touch_in(liverpool_street)
     oyster.touch_out(bow_road)
-    expect { oyster.show_history }.to output("Entry station: liverpool_street, Exit station: bow_road\n").to_stdout
+    expect(oyster.history).to include journey
+  end
+
+  describe 'show history' do
+    it "lists the entry and exit stations" do
+      oyster.touch_in(liverpool_street)
+      oyster.touch_out(bow_road)
+      expect { oyster.show_history }.to output("Entry station: liverpool_street, Exit station: bow_road\n").to_stdout
+    end
   end
 end
