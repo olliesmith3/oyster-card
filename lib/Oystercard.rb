@@ -25,12 +25,18 @@ class Oystercard
 
   def touch_out(station, amount = MINIMUM_FARE)
     deduct(amount)
-    @history << Journey.new(@entry_station).finish_journey(station)
+    @history << Journey.new(@entry_station).finish(station)
     @entry_station = nil
   end
 
   def in_journey?
     !@entry_station.nil?
+  end
+
+  def show_history
+    @history.each do |element|
+      puts "Entry station: #{element[:entry_station]}, Exit station: #{element[:exit_station]}"
+    end
   end
 
   private
